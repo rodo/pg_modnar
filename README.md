@@ -28,8 +28,12 @@ And execute the file `pgtle.pg_modnar-0.0.1.sql` on your instance
 
 ```
 get_random_date()
+get_random_firstname()
+get_random_float()
+get_random_inet()
+get_random_integer()
+get_random_integer(minimum INTEGER, maximum INTEGER)
+get_random_json()
 get_random_text()
 get_random_text(string_length INTEGER, possible_chars TEXT)
-get_random_integer()
-get_random_json()
 ```

@@ -1,6 +1,6 @@
 SELECT pgtle.install_extension
 (
- 'ddl_historization',
+ 'pg_modnar',
  '_EXTVERSION_',
- 'DDL changes historization',
+ 'Generate random data',
 $_pg_tle_$

@@ -1,6 +1,3 @@
-\timing on
-BEGIN;
-
 -- Get a random date
 --
 --
@@ -23,21 +20,3 @@ BEGIN
     return result;
 END;
 $$ language plpgsql;
-
-COMMIT;
-
-/* 
-SELECT get_random_date(),
-       get_random_date('3 week') as rand, 
-       get_random_date('3 week', 'past') as past, 
-       get_random_date('3 week', 'future') as future, 
-       generate_series(1,7);
-
-WITH rdate AS (
-SELECT get_random_date('30 year') as rand, 
-       get_random_date('30 year', 'past') as past, 
-       get_random_date('30 year', 'future') as future, 
-       generate_series(1,7000)
-) SELECT min(rand), max(rand), min(past), max(future) from rdate;
-
-*/

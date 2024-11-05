@@ -23,8 +23,7 @@ include $(PGXS)
 all: $(FILES) $(TESTFILES)
 
 clean:
-	rm -f $(FILES) $(TESTFILES) $(DATA)
-	rm -f $(PGTLEOUT)
+	rm -f $(DATA) $(PGTLEOUT)
 
 test:
 	pg_prove $(TESTFILES)

@@ -1,6 +1,3 @@
-\timing on
-BEGIN;
-
 -- Source of country names : https://www.data.gouv.fr/fr/datasets/r/10bfaf29-2d13-48a3-bf6b-7ea8725c9ff2
 --
 -- return : text
@@ -17,6 +14,3 @@ BEGIN
     RETURN result;
 END;
 $$ language plpgsql;
-
-
-COMMIT;

@@ -19,6 +19,8 @@ jobs:
       - run: pg-start ${{ matrix.version }}
       - uses: actions/checkout@v4
 
+      - run: sudo apt-get install -y --no-install-recommends postgresql-${{ matrix.version }}-pgtap
+      - run: psql -c 'CREATE EXTENSION pgtap'
       # Basic regression test.
       - run: pg-build-test
 

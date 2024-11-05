@@ -6,9 +6,9 @@ TESTFILES = test/sql/get_random_country.sql
 
 EXTENSION = pg_modnar
 
-EXTVERSION = 0.0.2
+EXTVERSION = 0.0.3
 
-DATA = pg_modnar--$(EXTVERSION).sql pg_modnar--0.0.1--0.0.2.sql
+DATA = $(wildcard pg_modnar--*.sql)
 
 PGTLEOUT = pgtle.$(EXTENSION)-$(EXTVERSION).sql
 
@@ -22,6 +22,9 @@ include $(PGXS)
 
 all: build
 
+clean:
+	rm -f pg_modnar--$(EXTVERSION).sql $(PGTLEOUT)
+
 test:
 	pg_prove $(TESTFILES)
 
@@ -31,6 +34,6 @@ pgtle: build
 	cat pgtle_footer.in >> $(PGTLEOUT)
 
 build: $(FILES)
-	cat $(FILES) > $(DATA)
+	cat $(FILES) > pg_modnar--$(EXTVERSION).sql
 
 install: build

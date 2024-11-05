@@ -1,0 +1,34 @@
+name: Test
+on:
+  push:
+    branches: ['*']
+  pull_request:
+  schedule:
+    - cron:  '0 14 3 * *' # Monthly at 2pm on the third
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - { version: 17 }
+    name: PostgreSQL ${{ matrix.version }}
+    runs-on: ubuntu-latest
+    container: pgxn/pgxn-tools
+    env:
+      PGUSER: postgres
+    steps:
+      - run: pg-start ${{ matrix.version }}
+      - uses: actions/checkout@v4
+
+      # Basic regression test.
+      - run: pg-build-test
+
+      # Test update.
+      - run: 'if [ -d "$UPDATE_FROM" ]; then make uninstall clean updatecheck; fi'
+
+      # Test all, install, test, test-serial, and test-parallel, both from clean
+      # repo and repeated with existing build, with and without PARALLEL_CONN=1.
+      - run: make uninstall clean all
+      - run: make all
+      - run: make uninstall clean install
+      - run: make install

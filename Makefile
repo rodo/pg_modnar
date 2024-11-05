@@ -6,9 +6,9 @@ TESTFILES = test/sql/get_random_country.sql
 
 EXTENSION = pg_modnar
 
-EXTVERSION = 0.0.1
+EXTVERSION = 0.0.2
 
-DATA = pg_modnar--$(EXTVERSION).sql
+DATA = pg_modnar--$(EXTVERSION).sql pg_modnar--0.0.1--0.0.2.sql
 
 PGTLEOUT = pgtle.$(EXTENSION)-$(EXTVERSION).sql
 
@@ -20,30 +20,17 @@ SCHEMA = @extschema@
 
 include $(PGXS)
 
-all: $(FILES) $(TESTFILES)
-
-clean:
-	rm -f $(DATA) $(PGTLEOUT)
+all: build
 
 test:
 	pg_prove $(TESTFILES)
 
-flush:
-	psql -f clean/drop_event_trigger.sql
-	psql -f clean/drop_function.sql
-	psql -f clean/drop_table.sql
-	psql -f table.sql
-	psql -f function.sql
-	psql -f event_trigger.sql
-
 pgtle: build
 	sed -e 's/_EXTVERSION_/$(EXTVERSION)/' pgtle_header.in > $(PGTLEOUT)
-	cat $(DATA) >>  $(PGTLEOUT)
+	cat pg_modnar--$(EXTVERSION).sql >>  $(PGTLEOUT)
 	cat pgtle_footer.in >> $(PGTLEOUT)
 
-
 build: $(FILES)
-	echo "#" > $(DATA)
 	cat $(FILES) > $(DATA)
 
 install: build

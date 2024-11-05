@@ -32,4 +32,5 @@ jobs:
       - run: make uninstall clean all
       - run: make all
       - run: make install
+      - run: psql -c 'CREATE EXTENSION pg_modnar'
       - run: pg_prove -r --ext .sql test/sql/

@@ -13,7 +13,7 @@ jobs:
 
     name: 🐘 PostgreSQL ${{ matrix.version }}
     runs-on: ubuntu-latest
-    container: pgxn/pgxn-tools
+    container: rodoq/postgres-pgtap
     env:
       PGUSER: postgres
     steps:

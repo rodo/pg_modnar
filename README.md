@@ -23,3 +23,13 @@ $ make pgtle
 ```
 
 And execute the file `pgtle.pg_modnar-0.0.1.sql` on your instance
+
+## Functions
+
+```
+get_random_date()
+get_random_text()
+get_random_text(string_length INTEGER, possible_chars TEXT)
+get_random_integer()
+get_random_json()
+```

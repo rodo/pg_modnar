@@ -1,4 +1,3 @@
-
 -- Get a random string
 --
 -- source : https://www.depesz.com/2017/02/06/generate-short-random-textual-ids/
@@ -20,5 +19,29 @@ BEGIN
         output := output || substr(possible_chars, pos, 1);
     END LOOP;
     RETURN output;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION get_random_text(
+        IN string_length INTEGER,
+        IN possible_chars TEXT
+        DEFAULT '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    ) RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    i INT4;
+    pos INT4;
+BEGIN
+    RETURN get_random_string(string_length, possible_chars);
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION get_random_text() RETURNS text
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    RETURN get_random_string(CAST(random()*32 AS INTEGER));
 END;
 $$;

@@ -29,6 +29,6 @@ jobs:
       - run: make all
       - run: make uninstall clean install
       - run: make install
-      - run: psql -Ec 'CREATE EXTENSION pg_modnar'
+      - run: psql -Ec 'CREATE EXTENSION pgtap'
       - run: make uninstall clean test
       - run: make test
